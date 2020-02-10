@@ -6,7 +6,6 @@ import switches
 import case
 from switches import mm, switch_size
 
-
 def create_screws():
     radius = 2.1 * mm / 2
 
@@ -21,14 +20,12 @@ def create_screws():
     holes = [
         # top
         ((0, 3), (-0.5, 0.5), (0, -2 * mm)),
-        ((2, 3), (0.5, 0.5)),
+        ((2, 3), (0, 0.5)),
         ((4, 3), (0.5, 0.5), (0, -2 * mm)),
         # bottom
         ((0, 1), (-0.5, -0.5)),
-        ((3, 1), (-0.5, -0.5)),
-        ((4, 1), (0.5, -0.5)),
-        # mid
-        ((2, 1), (0.5, 0.5)),
+        ((2, 1), (0, -0.5), (0, -2.5 * mm)),
+        ((4, 1), (0.5, -0.5), (1.5*mm, 1.5*mm)),
         # thumb fan
         ((0, 0), (-0.5, -0.5)),
         ((thumb_fan_size - 2, 0), (0, 0.5)),
@@ -47,7 +44,7 @@ switch_plate = case - switches.create_all_switches(size=switch_size) - create_sc
 buttom_plate = case - create_screws()
 
 d = sc.linear_extrude(1.5 * mm)(switch_plate)
-d = d + sc.utils.up(-6 * mm)(sc.linear_extrude(1.5 * mm)(buttom_plate))
+# d = d + sc.utils.up(-6 * mm)(sc.linear_extrude(1.5 * mm)(buttom_plate))
 d = sc.color("silver")(d) + switches.create_all_caps()
 
 sc.scad_render_to_file(d, "/tmp/output.scad")

@@ -31,8 +31,8 @@ def get_switch_position(addr: Point2) -> Point2:
         x = col
         y = row + virtical_col_offsets[col]
     else:
-        x = 3
-        y = virtical_col_offsets[3] - 0.1
+        x = 4
+        y = virtical_col_offsets[x]
         thumb_row_radiuss = 3.5
         switch_angle = -get_switch_angle((col, row)) / 180 * math.pi
         x += math.sin(switch_angle) * thumb_row_radiuss
