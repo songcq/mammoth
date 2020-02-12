@@ -6,6 +6,8 @@ import switches
 import case
 from switches import mm, switch_size
 
+sc.SEGMENTS = 100
+
 def create_screws():
     radius = 2.1 * mm / 2
 
@@ -24,8 +26,8 @@ def create_screws():
         ((4, 3), (0.5, 0.5), (0, -2 * mm)),
         # bottom
         ((0, 1), (-0.5, -0.5)),
-        ((2, 1), (0, -0.5), (0, -2.5 * mm)),
-        ((4, 1), (0.5, -0.5), (1.5*mm, 1.5*mm)),
+        ((2, 1), (0, -0.5), (0, -2.75 * mm)),
+        ((4, 1), (0.5, -0.5)),
         # thumb fan
         ((0, 0), (-0.5, -0.5)),
         ((thumb_fan_size - 2, 0), (0, 0.5)),
@@ -46,13 +48,23 @@ buttom_plate = case - create_screws()
 d = sc.linear_extrude(1.5 * mm)(switch_plate)
 # d = d + sc.utils.up(-6 * mm)(sc.linear_extrude(1.5 * mm)(buttom_plate))
 d = sc.color("silver")(d) + switches.create_all_caps()
+# d = switch_plate
 
 sc.scad_render_to_file(d, "/tmp/output.scad")
 
+
 p0 = switches.get_cap_corner((1, 0), Point2(0.001, 0))
 p1 = switches.get_cap_corner((2, 0), Point2(0.001, 0))
-print((p0.distance(p1)) * 19.05)
+print("thumb fan switch distance:", (p0.distance(p1)) * 19.05)
 
 p0 = switches.get_cap_corner((1, 0), Point2(switch_size/2, -switch_size/2))
 p1 = switches.get_cap_corner((2, 0), Point2(-switch_size/2, -switch_size/2))
-print((p0.distance(p1)) * 19.05)
+print("thumb fan switch lower corner distance:", (p0.distance(p1)) * 19.05)
+
+p0 = switches.get_cap_corner((1, 0), Point2(0.5, 0.5))
+p1 = switches.get_cap_corner((2, 0), Point2(-0.5, 0.5))
+print("thumb fan cap upper corner distance:", (p0.distance(p1)) * 19.05)
+
+p0 = switches.get_cap_corner((0, 1), Point2(-0.5, 0))
+p1 = switches.get_cap_corner((switches.thumb_fan_size - 1, 0), Point2(0.5, 0.5))
+print("switches total width:", p1.x - p0.x)

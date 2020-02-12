@@ -22,7 +22,7 @@ def get_switch_angle(addr: Point2) -> float:
     if addr[1] >= 1:
         return 0
     else:
-        return addr[0] * -15
+        return -(1 + addr[0]) * 11.25
 
 
 def get_switch_position(addr: Point2) -> Point2:
@@ -31,9 +31,9 @@ def get_switch_position(addr: Point2) -> Point2:
         x = col
         y = row + virtical_col_offsets[col]
     else:
-        x = 4
-        y = virtical_col_offsets[x]
-        thumb_row_radiuss = 3.5
+        x = 2.7
+        y = -0.3
+        thumb_row_radiuss = 4.5
         switch_angle = -get_switch_angle((col, row)) / 180 * math.pi
         x += math.sin(switch_angle) * thumb_row_radiuss
         y -= (1 - math.cos(switch_angle)) * thumb_row_radiuss

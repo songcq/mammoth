@@ -32,15 +32,18 @@ def _circle_center_by_three_points(p0: Point2, p1: Point2, p2: Point2) -> Point2
     return Point2(cex, cey)
 
 
-def three_point_cicle(p0: Point2, p1: Point2, p2: Point2, radius_adjustment=0):
+def three_point_cicle(
+    p0: Point2, p1: Point2, p2: Point2, radius_adjustment=0, segments=100
+):
     center = _circle_center_by_three_points(p0, p1, p2)
     radius = ((center[0] - p0[0]) ** 2 + (center[1] - p0[1]) ** 2) ** 0.5
     return solid.translate((center[0], center[1], 0))(
-        solid.circle(radius + radius_adjustment, segments=100)
+        solid.circle(radius + radius_adjustment, segments=segments)
     )
+
 
 def point_angle(a: Point2):
     angle = math.degrees(math.acos(a.x / a.magnitude()))
     if a.y < 0:
-        angle = - angle
+        angle = -angle
     return angle
