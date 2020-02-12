@@ -69,8 +69,8 @@ def create_thumb_fan():
 
 def create_left_buttom_circle():
     p0 = switches.get_cap_corner((0, 1), Point2(0.5, -0.5))
-    p1 = switches.get_cap_corner((1, 1), Point2(0.5, -0.55))
-    p2 = switches.get_cap_corner((3, 1), Point2(0, -0.575))
+    p1 = switches.get_cap_corner((1, 1), Point2(0.5, -0.5))
+    p2 = switches.get_cap_corner((3, 1), Point2(0, -0.62))
     circle = utils.three_point_cicle(
         p0, p1, p2, radius_adjustment=1.5 * mm, segments=1000
     )
