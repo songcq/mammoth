@@ -32,7 +32,7 @@ d = sc.color("silver")(d) + switches.create_all_caps()
 #     switches.create_all_switches() - d
 # )
 
-sc.scad_render_to_file(d, "/tmp/output.scad")
+sc.scad_render_to_file(sc.scale(19.05)(d), "/tmp/output.scad")
 
 
 def print_stats():

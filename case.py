@@ -82,6 +82,6 @@ def create_case():
     case = create_upper_case()
     case = case - create_left_buttom_circle()
     case = case + create_thumb_fan()
-    case = sc.offset(r=15 * mm, segments=100)(case)
-    case = sc.offset(r=-12.5 * mm, segments=100)(case)
+    case = sc.offset(r=10 * mm, segments=100)(case)
+    case = sc.offset(r=-7.5 * mm, segments=100)(case)
     return case
