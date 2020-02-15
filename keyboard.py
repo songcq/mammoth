@@ -13,18 +13,19 @@ sc.SEGMENTS = 100
 
 case = case.create_case()
 
-screws_holes = screws.create_screws()
+screws_holes = screws.create_screws(screw_position=screws.Screw_Position.In_case_wall)
 
 switch_plate = case - switches.create_all_switches(size=switch_size) - screws_holes
 
-buttom_plate = case - screws_holes
+bottom_plate = case - screws_holes
 
 
 d = sc.linear_extrude(1.5 * mm)(switch_plate)
-d = d + sc.utils.up(-6 * mm)(sc.linear_extrude(1.5 * mm)(buttom_plate))
-d = sc.color("silver")(d) + switches.create_all_caps()
+# d = d + sc.utils.up(-6 * mm)(sc.linear_extrude(1.5 * mm)(bottom_plate))
+# d = sc.color("silver")(d) + switches.create_all_caps()
 
 # d = switch_plate
+# d = bottom_plate
 
 # d = case - (sc.offset(-2 * mm)(case))
 # d = d + screws.create_screws(diameter=5 * mm) - screws.create_screws(diameter=3 * mm)
