@@ -27,7 +27,7 @@ def get_scew_positions(screw_position: Screw_Position) -> typing.List[Point2]:
             ((4, 3), (0.5, 0.5 - 2 * mm)),
             # mid
             # ((1, 2), (-0.5, -0.25)),
-            ((2, 2), (0, -0.5)),
+            # ((2, 2), (0, -0.5)),
             # ((4, 2), (-0.5, 0)),
             # # bottom
             ((0, 1), (-0.5, -0.5)),

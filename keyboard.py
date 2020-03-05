@@ -8,9 +8,6 @@ import case
 import screws
 from switches import mm, switch_size
 
-sc.SEGMENTS = 100
-
-
 case = case.create_case()
 
 screws_holes = screws.create_screws(screw_position=screws.Screw_Position.In_case_wall)
@@ -20,20 +17,19 @@ switch_plate = case - switches.create_all_switches(size=switch_size) - screws_ho
 bottom_plate = case - screws_holes
 
 
-d = sc.linear_extrude(1.5 * mm)(switch_plate)
+# d = sc.linear_extrude(1.5 * mm)(switch_plate)
 # d = d + sc.utils.up(-6 * mm)(sc.linear_extrude(1.5 * mm)(bottom_plate))
 # d = sc.color("silver")(d) + switches.create_all_caps()
 
 # d = switch_plate
 # d = bottom_plate
 
-# d = case - (sc.offset(-2 * mm)(case))
-# d = d + screws.create_screws(diameter=5 * mm) - screws.create_screws(diameter=3 * mm)
-# d = (d - switches.create_all_switches()) + (
-#     switches.create_all_switches() - d
-# )
+d = case - (sc.offset(-2 * mm)(case))
+d = d + screws.create_screws(diameter=5 * mm) - screws.create_screws(diameter=3 * mm)
+d = sc.linear_extrude(4*mm)(d)
+# d = (d - switches.create_all_switches(size=0.8))
 
-sc.scad_render_to_file(sc.scale(19.05)(d), "/tmp/output.scad")
+sc.scad_render_to_file(sc.scale(19.05)(d), "/tmp/output.scad", file_header="$fn=100;")
 
 
 def print_stats():
