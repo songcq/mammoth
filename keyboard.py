@@ -16,7 +16,6 @@ switch_plate = case - switches.create_all_switches(size=switch_size) - screws_ho
 
 bottom_plate = case - screws_holes
 
-
 # d = sc.linear_extrude(1.5 * mm)(switch_plate)
 # d = d + sc.utils.up(-6 * mm)(sc.linear_extrude(1.5 * mm)(bottom_plate))
 # d = sc.color("silver")(d) + switches.create_all_caps()
@@ -24,10 +23,26 @@ bottom_plate = case - screws_holes
 # d = switch_plate
 # d = bottom_plate
 
-d = case - (sc.offset(-2 * mm)(case))
-d = d + screws.create_screws(diameter=5 * mm) - screws.create_screws(diameter=3 * mm)
-d = sc.linear_extrude(4*mm)(d)
-# d = (d - switches.create_all_switches(size=0.8))
+
+def get_case_wall(height):
+    d = case - (sc.offset(-2 * mm)(case))
+    d = (
+        d
+        + screws.create_screws(diameter=5.2 * mm)
+        - screws.create_screws(diameter=3.2 * mm)
+    )
+    d = sc.linear_extrude(height)(d)
+    # d = (d - switches.create_all_switches(size=0.8))
+    return d
+
+
+def get_case_wall_and_bottom(height):
+    d = sc.linear_extrude(1.5 * mm)(bottom_plate)
+    d = d + get_case_wall(height=height)
+    return d
+
+
+d = get_case_wall_and_bottom(height=5.5 * mm)
 
 sc.scad_render_to_file(sc.scale(19.05)(d), "/tmp/output.scad", file_header="$fn=100;")
 
